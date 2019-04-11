@@ -739,6 +739,10 @@ extension MapKitSearchViewController: CLLocationManagerDelegate {
         mapView.setCenter(location.coordinate, animated: true)
         manager.stopUpdatingLocation()
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+    }
 }
 
 // MARK: - Protocol
