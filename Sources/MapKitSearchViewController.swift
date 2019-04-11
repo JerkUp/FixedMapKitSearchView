@@ -740,7 +740,7 @@ extension MapKitSearchViewController: CLLocationManagerDelegate {
         manager.stopUpdatingLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
     }
 }
