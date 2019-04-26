@@ -15,4 +15,10 @@ public class MapItemTableViewCell: UITableViewCell {
         detailTextLabel?.text = mapItem.placemark.title
         imageView?.tintColor = tintColor
     }
+    
+    func viewSetup(title: String, tintColor: UIColor? = nil) {
+        textLabel?.text = title
+        detailTextLabel?.text = ""
+        imageView?.tintColor = tintColor
+    }
 }

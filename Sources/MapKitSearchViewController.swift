@@ -216,10 +216,16 @@ public class MapKitSearchViewController: UIViewController, UIGestureRecognizerDe
         view.backgroundColor = onlySearchMode ? .clear : .white
         
         if onlySearchMode {
-            compassParent.isHidden = true
-            mapView.isHidden = true
-            tabView.isHidden = true
+            compassParent.alpha = 0
+            mapView.alpha = 0
+            tabView.alpha = 0
         }
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        searchBar.becomeFirstResponder()
     }
     
     deinit {
@@ -653,10 +659,14 @@ extension MapKitSearchViewController: UISearchBarDelegate, MKLocalSearchComplete
 // MARK: - Table Data Source
 extension MapKitSearchViewController: UITableViewDataSource {
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return onlySearchMode ? 2 : 1
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if onlySearchMode && section == 1 {
+            return 1
+        }
+        
         switch tableViewType {
         case .searchCompletion:
             return searchCompletions.count
@@ -666,6 +676,12 @@ extension MapKitSearchViewController: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if onlySearchMode && indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MapItem", for: indexPath) as! MapItemTableViewCell
+            cell.viewSetup(title: "Select From Map", tintColor:UIColor.red)
+            return cell
+        }
+        
         switch tableViewType {
         case .searchCompletion:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCompletion", for: indexPath) as! SearchCompletionTableViewCell
@@ -681,11 +697,38 @@ extension MapKitSearchViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
     }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
 }
 
 // MARK: - Table View Delegate
 extension MapKitSearchViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if onlySearchMode && indexPath.section == 1 {
+            onlySearchMode = false
+            
+            searchBar.text = ""
+            searchBar.resignFirstResponder()
+            searchMapItems.removeAll()
+            tableView.reloadData()
+            tableViewHide()
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.compassParent.alpha = 1
+                self.mapView.alpha = 1
+                self.tabView.alpha = 1
+            }) { (_) in
+                self.view.backgroundColor = .white
+            }
+            return
+        }
+        
         switch tableViewType {
         case .searchCompletion:
             guard searchCompletions.count > indexPath.row else {
