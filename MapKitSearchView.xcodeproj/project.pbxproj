@@ -18,6 +18,7 @@
 		D4732DFD2211461500CB838C /* MapItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4732DFB2211461500CB838C /* MapItemTableViewCell.swift */; };
 		D4732E492211989400CB838C /* CLPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4732E482211989400CB838C /* CLPlacemark.swift */; };
 		D4732E4B2211A1BF00CB838C /* MKMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4732E4A2211A1BF00CB838C /* MKMapView.swift */; };
+		D5902DC02273A2B300DA2489 /* EndEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5902DBF2273A2B300DA2489 /* EndEditingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		D4732E4622118C6500CB838C /* Material.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Material.xcassets; sourceTree = "<group>"; };
 		D4732E482211989400CB838C /* CLPlacemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlacemark.swift; sourceTree = "<group>"; };
 		D4732E4A2211A1BF00CB838C /* MKMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapView.swift; sourceTree = "<group>"; };
+		D5902DBF2273A2B300DA2489 /* EndEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndEditingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		D4732DF22210732100CB838C /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				D5902DBF2273A2B300DA2489 /* EndEditingView.swift */,
 				D4732DF32210733800CB838C /* MapTabsView.swift */,
 				D4732DF52210760900CB838C /* BottomSheetView.swift */,
 				D4732DF7221145C100CB838C /* SearchCompletionTableViewCell.swift */,
@@ -148,7 +151,7 @@
 				TargetAttributes = {
 					D4732DE022106F5600CB838C = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -158,6 +161,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = D4732DD722106F5600CB838C;
 			productRefGroup = D4732DE222106F5600CB838C /* Products */;
@@ -193,6 +197,7 @@
 				D4732E492211989400CB838C /* CLPlacemark.swift in Sources */,
 				D4732E4B2211A1BF00CB838C /* MKMapView.swift in Sources */,
 				D4732DF9221145C100CB838C /* SearchCompletionTableViewCell.swift in Sources */,
+				D5902DC02273A2B300DA2489 /* EndEditingView.swift in Sources */,
 				D4732DFD2211461500CB838C /* MapItemTableViewCell.swift in Sources */,
 				D4732DF0221072A700CB838C /* MapKitSearchViewController.swift in Sources */,
 			);
@@ -346,7 +351,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -373,7 +378,7 @@
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

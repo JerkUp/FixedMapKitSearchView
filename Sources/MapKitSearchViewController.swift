@@ -10,6 +10,14 @@ import MapKit
 import UIKit
 
 public class MapKitSearchViewController: UIViewController, UIGestureRecognizerDelegate {
+    open var onlySearchMode: Bool = false {
+        didSet {
+            if onlySearchMode {
+                self.modalPresentationStyle = .overCurrentContext
+            }
+        }
+    }
+    
     @IBOutlet public var mapView: MKMapView!
     // MARK: - Tab Views
     @IBOutlet public var close: UIButton!
@@ -197,11 +205,20 @@ public class MapKitSearchViewController: UIViewController, UIGestureRecognizerDe
         // Invoke didSet of respective properties.
         self.tintColor = { tintColor }()
         self.markerTintColor = { markerTintColor }()
-        if let userLocationRequest = userLocationRequest {
+        
+        if let userLocationRequest = userLocationRequest, !onlySearchMode {
             locationManagerRequestLocation(withPermission: userLocationRequest)
         }
         if let searchBarTextField = searchBarTextField {
             searchBarTextField.font = UIFont.systemFont(ofSize: 15)
+        }
+        
+        view.backgroundColor = onlySearchMode ? .clear : .white
+        
+        if onlySearchMode {
+            compassParent.isHidden = true
+            mapView.isHidden = true
+            tabView.isHidden = true
         }
     }
     
@@ -619,6 +636,11 @@ extension MapKitSearchViewController: UISearchBarDelegate, MKLocalSearchComplete
         searchRequestFuture?.invalidate()
         // User interactions can dismiss keyboard, we prevent another search.
         if !isUserInteracted {
+            guard !onlySearchMode else {
+                dismiss(animated: true)
+                return
+            }
+            
             searchRequestStart(dismissKeyboard: true)
         }
     }

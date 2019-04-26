@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let mapKit = MapKitSearchViewController(delegate: self)
+        mapKit.onlySearchMode = true
         present(mapKit, animated: true, completion: nil)
     }
 }
