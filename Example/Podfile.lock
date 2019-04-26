@@ -1,0 +1,16 @@
+PODS:
+  - MapKitSearchView (1.0.2)
+
+DEPENDENCIES:
+  - MapKitSearchView (from `../`)
+
+EXTERNAL SOURCES:
+  MapKitSearchView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MapKitSearchView: 8bb3e00248889afbef264bfe04049c667264c472
+
+PODFILE CHECKSUM: e3b5caeffdf4bee16cd0396738f30fb760f6492c
+
+COCOAPODS: 1.6.1
