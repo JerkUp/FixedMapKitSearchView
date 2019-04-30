@@ -642,9 +642,8 @@ extension MapKitSearchViewController: UISearchBarDelegate, MKLocalSearchComplete
         searchRequestFuture?.invalidate()
         // User interactions can dismiss keyboard, we prevent another search.
         if !isUserInteracted {
-            guard !onlySearchMode else {
-                dismiss(animated: true)
-                return
+            if onlySearchMode  {
+                showMap()
             }
             
             searchRequestStart(dismissKeyboard: true)
@@ -709,23 +708,27 @@ extension MapKitSearchViewController: UITableViewDataSource {
 
 // MARK: - Table View Delegate
 extension MapKitSearchViewController: UITableViewDelegate {
+    func showMap() {
+        onlySearchMode = false
+        
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchMapItems.removeAll()
+        tableView.reloadData()
+        tableViewHide()
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.compassParent.alpha = 1
+            self.mapView.alpha = 1
+            self.tabView.alpha = 1
+        }) { (_) in
+            self.view.backgroundColor = .white
+        }
+    }
+    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if onlySearchMode && indexPath.section == 1 {
-            onlySearchMode = false
-            
-            searchBar.text = ""
-            searchBar.resignFirstResponder()
-            searchMapItems.removeAll()
-            tableView.reloadData()
-            tableViewHide()
-            
-            UIView.animate(withDuration: 0.5, animations: {
-                self.compassParent.alpha = 1
-                self.mapView.alpha = 1
-                self.tabView.alpha = 1
-            }) { (_) in
-                self.view.backgroundColor = .white
-            }
+            showMap()
             return
         }
         
