@@ -663,7 +663,7 @@ extension MapKitSearchViewController: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if onlySearchMode && section == 1 {
-            return 1
+            return (searchBar.text?.count ?? 0 > 0 ? 1 : 0)
         }
         
         switch tableViewType {
@@ -677,7 +677,7 @@ extension MapKitSearchViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if onlySearchMode && indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MapItem", for: indexPath) as! MapItemTableViewCell
-            cell.viewSetup(title: "Select From Map", tintColor:UIColor.red)
+            cell.viewSetup(title: "Find on the map", tintColor:UIColor.red)
             return cell
         }
         
